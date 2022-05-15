@@ -9,6 +9,8 @@ import androidx.compose.foundation.gestures.detectDragGesturesAfterLongPress
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -31,50 +33,26 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Box(modifier = Modifier
-                .fillMaxSize(), contentAlignment = Alignment.Center) {
-//                ListItem(name = "Arnold Shvarzneger", prof = "actor", R.drawable.arnold)
-//                ListItem(name = "Brus Willis", prof = "actor", R.drawable.brus)
-//                ListItem(name = "Jan Clod VanDamm", prof = "actor", R.drawable.jkvd)
-//                ListItem(name = "Arnold Shvarzneger", prof = "actor", R.drawable.arnold)
-//                ListItem(name = "Brus Willis", prof = "actor", R.drawable.brus)
-//                ListItem(name = "Jan Clod VanDamm", prof = "actor", R.drawable.jkvd)
-//                ListItem(name = "Arnold Shvarzneger", prof = "actor", R.drawable.arnold)
-//                ListItem(name = "Brus Willis", prof = "actor", R.drawable.brus)
-//                ListItem(name = "Jan Clod VanDamm", prof = "actor", R.drawable.jkvd)
-//                ListItem(name = "Arnold Shvarzneger", prof = "actor", R.drawable.arnold)
-//                ListItem(name = "Brus Willis", prof = "actor", R.drawable.brus)
-//                ListItem(name = "Jan Clod VanDamm", prof = "actor", R.drawable.jkvd)
-                CircleItem()
+            LazyColumn(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier
+                    .fillMaxSize()
+            ) {
+                itemsIndexed(
+                    listOf("item1", "item2", "End", "Finish")
+                ) { index, item ->
+                    Text(
+                        text = item,
+                        fontSize = 30.sp,
+                        modifier = Modifier.padding(vertical = 10.dp)
+                    )
+                }
+
             }
 
         }
     }
 }
 
-@Composable
-fun CircleItem() {
-    val counter = remember {
-        mutableStateOf(0)
-    }
-    val color = remember {
-        mutableStateOf(Color.Blue)
-    }
-    Box(modifier = Modifier
-        .size(100.dp)
-        .background(color = color.value, shape = CircleShape)
-        .clickable {
-            when(++counter.value) {
-                10 -> color.value = Color.Red
-                20 -> color.value = Color.Green
-            }
-        },
-        contentAlignment = Alignment.Center
-            ) {
-        Text(text = counter.value.toString(),
-            style = TextStyle(color = Color.White, fontSize = 20.sp))
-    }
-
-}
 
 
